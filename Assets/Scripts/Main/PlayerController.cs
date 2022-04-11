@@ -8,6 +8,13 @@ public class PlayerController : MonoBehaviour
     private const float Speed = 5.0f;
     private Rigidbody _playerRigidbody;
 
+    [SerializeField]
+    private GameObject _itemHolderLocation;
+
+    public GameObject HeldItem;
+
+    public GameObject NearbyItem;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +25,21 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleMovement();
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (HeldItem != null)
+            {
+                // Drop item
+                DropItem();
+            }
+            else if (NearbyItem != null)
+            {
+                // Pickup nearby item
+                PickUpItem();
+            }
+        }
+        
     }
 
     void HandleMovement()
@@ -28,5 +50,21 @@ public class PlayerController : MonoBehaviour
         Vector3 inputDir = new Vector3(horizontalInput, 0, verticalInput);
         
         _playerRigidbody.velocity = inputDir * Speed;
+
+        if (HeldItem == null) return;
+
+        HeldItem.transform.position = _itemHolderLocation.transform.position;
+
+    }
+
+    void PickUpItem()
+    {
+        HeldItem = NearbyItem;
+        NearbyItem = null;
+    }
+    
+    void DropItem()
+    {
+        HeldItem = null;
     }
 }
