@@ -14,11 +14,14 @@ public class PlayerController : MonoBehaviour
     public GameObject HeldItem;
 
     public GameObject NearbyItem;
+
+    private DeliveryZone _deliveryZone;
     
     // Start is called before the first frame update
     void Start()
     {
         _playerRigidbody = GetComponent<Rigidbody>();
+        _deliveryZone = GameObject.Find("DeliveryZone").GetComponent<DeliveryZone>();
     }
 
     // Update is called once per frame
@@ -39,7 +42,12 @@ public class PlayerController : MonoBehaviour
                 PickUpItem();
             }
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _deliveryZone.TurnInOrder();
+        }
+
     }
 
     void HandleMovement()

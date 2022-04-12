@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
     {
         if (other.gameObject.name.Equals("Player"))
         {
-            Debug.Log("Entered item trigger zone " + gameObject.name);
+            // Debug.Log("Entered item trigger zone " + gameObject.name);
             PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
             playerController.NearbyItem = gameObject;
         }
@@ -32,7 +32,7 @@ public class Item : MonoBehaviour
     {
         if (other.gameObject.name.Equals("Player"))
         {
-            Debug.Log("Exited item trigger zone " + gameObject.name);
+            // Debug.Log("Exited item trigger zone " + gameObject.name);
             PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
             
             if (playerController.NearbyItem != null && playerController.NearbyItem.Equals(gameObject))
@@ -41,4 +41,6 @@ public class Item : MonoBehaviour
             }
         }
     }
+
+    public abstract string GetItemId();
 }

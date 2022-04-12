@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Candle : Item
 {
-    
+    public override string GetItemId()
+    {
+        return "candle-red";
+    }
 }
