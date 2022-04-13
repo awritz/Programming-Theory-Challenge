@@ -478,6 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fundingText: {fileID: 1195827620}
+  orderTimer: {fileID: 937010361}
 --- !u!114 &798797635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2001,7 +2002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerPrefab: {fileID: 3870775949382374961, guid: 97a00ae01414a0d4d8a48a5691543b4f, type: 3}
   customerLocation: {fileID: 1630563626}
-  orderTimer: {fileID: 937010361}
+  mainUIHandler: {fileID: 798797634}
 --- !u!65 &1983918173
 BoxCollider:
   m_ObjectHideFlags: 0

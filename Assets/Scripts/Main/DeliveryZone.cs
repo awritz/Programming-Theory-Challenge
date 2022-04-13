@@ -15,8 +15,11 @@ public class DeliveryZone : MonoBehaviour
 
     private List<Item> itemsInZone;
 
-    [SerializeField] private TextMeshProUGUI orderTimer;
+    [SerializeField]
+    private MainUIHandler mainUIHandler;
 
+    private bool orderIsComplete;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,18 +30,25 @@ public class DeliveryZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentCustomer == null) return;
+        if (orderIsComplete)
+        {
+            GetNextCustomer();
+            return;
+        }
+        
+        if (currentCustomer == null || currentCustomer.order == null) return;
             
         currentCustomer.DecrementOrderTimer();
 
-        orderTimer.text = $"Time Remaining for Order: {Mathf.Round(currentCustomer.order.timeLimit)}s";
+        float time = Mathf.Round(currentCustomer.order.timeLimit);
+        
+        mainUIHandler.UpdateTimerText(time);
         
         if (!currentCustomer.orderIsAvailable)
         {
             // Order has run out of time.
             // Get new customer
             Debug.Log("Order Failed! You have run out of time!");   
-            Destroy(currentCustomer);
             GetNextCustomer();
         }
     }
@@ -46,8 +56,12 @@ public class DeliveryZone : MonoBehaviour
     private void GetNextCustomer()
     {
         Debug.Log("Getting Next Customer");
+        if (currentCustomer != null) Destroy(currentCustomer.gameObject);
+
+        
         GameObject customer = Instantiate(customerPrefab, customerLocation.transform.position, customerLocation.transform.rotation);
         currentCustomer = customer.GetComponent<Customer>();
+        orderIsComplete = false;
         
         // TODO: UI list for order display
         
@@ -89,6 +103,19 @@ public class DeliveryZone : MonoBehaviour
         {
             Debug.Log("Order completed!"); 
             // Clear all items in zone
+            foreach (var item in itemsInZone)
+            {
+                Destroy(item.gameObject);
+            }
+            
+            // Add money for order
+            DataManager.Instance.money += orderedItems.Count * 5;
+
+            // Update money UI
+            mainUIHandler.UpdateFundingText();
+
+            orderIsComplete = true;
+
         }
         else
         {

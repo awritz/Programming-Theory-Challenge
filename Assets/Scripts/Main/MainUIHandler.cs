@@ -10,6 +10,8 @@ public class MainUIHandler : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI fundingText;
 
+    [SerializeField] private TextMeshProUGUI orderTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +20,7 @@ public class MainUIHandler : MonoBehaviour
             ReturnToMenu();
             return;
         }
-
-        fundingText.text = "Current Funding: $" + DataManager.Instance.money;
+        UpdateFundingText();
     }
 
     // Update is called once per frame
@@ -31,6 +32,16 @@ public class MainUIHandler : MonoBehaviour
     public void ReturnToMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void UpdateFundingText()
+    {
+        fundingText.text = "Current Funding: $" + DataManager.Instance.money;
+    }
+
+    public void UpdateTimerText(float value)
+    {
+        orderTimer.text = $"Time Remaining for Order: {value}s";
     }
     
 }
