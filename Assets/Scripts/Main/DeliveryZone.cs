@@ -107,6 +107,7 @@ public class DeliveryZone : MonoBehaviour
             {
                 Destroy(item.gameObject);
             }
+            itemsInZone.Clear();
             
             // Add money for order
             DataManager.Instance.money += orderedItems.Count * 5;
