@@ -15,6 +15,8 @@ public class Customer : MonoBehaviour
     {
         order = new Order(1, potentialItems);
         orderIsAvailable = true;
+
+        gameObject.GetComponent<Renderer>().material.SetColor("_Color", new Color(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f)));
     }
 
     // Update is called once per frame
