@@ -68,11 +68,13 @@ public class PlayerController : MonoBehaviour
     void PickUpItem()
     {
         HeldItem = NearbyItem;
+        HeldItem.GetComponent<Rigidbody>().detectCollisions = false;
         NearbyItem = null;
     }
     
     void DropItem()
     {
+        HeldItem.GetComponent<Rigidbody>().detectCollisions = true;
         HeldItem = null;
     }
 }
