@@ -6,6 +6,8 @@ public class Order
 {
     public Dictionary<string, int> items;
 
+    public float timeLimit;
+
     public Order(int itemCount, List<Item> potentialItems)
     {
         items = new Dictionary<string, int>();
@@ -15,6 +17,9 @@ public class Order
             items.TryGetValue(randomItem, out int currentCount);
             items[randomItem] = currentCount + 1;
         }
+
+        // Give 30 seconds per item in the order.
+        timeLimit = 30 * itemCount;
     }
 
 }

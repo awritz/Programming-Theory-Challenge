@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DeliveryZone : MonoBehaviour
@@ -14,6 +15,8 @@ public class DeliveryZone : MonoBehaviour
 
     private List<Item> itemsInZone;
 
+    [SerializeField] private TextMeshProUGUI orderTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,13 +27,30 @@ public class DeliveryZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currentCustomer == null) return;
+            
+        currentCustomer.DecrementOrderTimer();
+
+        orderTimer.text = $"Time Remaining for Order: {Mathf.Round(currentCustomer.order.timeLimit)}s";
         
+        if (!currentCustomer.orderIsAvailable)
+        {
+            // Order has run out of time.
+            // Get new customer
+            Debug.Log("Order Failed! You have run out of time!");   
+            Destroy(currentCustomer);
+            GetNextCustomer();
+        }
     }
 
     private void GetNextCustomer()
     {
+        Debug.Log("Getting Next Customer");
         GameObject customer = Instantiate(customerPrefab, customerLocation.transform.position, customerLocation.transform.rotation);
         currentCustomer = customer.GetComponent<Customer>();
+        
+        // TODO: UI list for order display
+        
     }
 
     public void TurnInOrder()
