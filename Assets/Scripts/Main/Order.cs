@@ -19,7 +19,7 @@ public class Order
         }
 
         // Give 30 seconds per item in the order.
-        timeLimit = 30 * itemCount;
+        timeLimit = 10 * itemCount;
     }
 
 }

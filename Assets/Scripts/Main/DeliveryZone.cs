@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Menu;
 using TMPro;
 using UnityEngine;
 
@@ -19,6 +21,7 @@ public class DeliveryZone : MonoBehaviour
     private MainUIHandler mainUIHandler;
 
     private bool orderIsComplete;
+    private bool newOrderIsAvailable = true;
     
     // Start is called before the first frame update
     void Start()
@@ -36,8 +39,15 @@ public class DeliveryZone : MonoBehaviour
             return;
         }
         
+        
         if (currentCustomer == null || currentCustomer.order == null) return;
-            
+
+        if (newOrderIsAvailable)
+        {
+            mainUIHandler.UpdateOrderDisplayText(currentCustomer.GetOrderDisplayText());
+            newOrderIsAvailable = false;
+        }
+        
         currentCustomer.DecrementOrderTimer();
 
         float time = Mathf.Round(currentCustomer.order.timeLimit);
@@ -62,9 +72,7 @@ public class DeliveryZone : MonoBehaviour
         GameObject customer = Instantiate(customerPrefab, customerLocation.transform.position, customerLocation.transform.rotation);
         currentCustomer = customer.GetComponent<Customer>();
         orderIsComplete = false;
-        
-        // TODO: UI list for order display
-        
+        newOrderIsAvailable = true;
     }
 
     public void TurnInOrder()
@@ -110,8 +118,13 @@ public class DeliveryZone : MonoBehaviour
             itemsInZone.Clear();
             
             // Add money for order
-            DataManager.Instance.money += orderedItems.Count * 5;
-
+            foreach (var orderedItem in orderedItems)
+            {
+                ItemDetails itemDetails = DataManager.Instance.items.First(i => i.name.Equals(orderedItem.Key));
+                // Total count of item purchased * cost of the item
+                DataManager.Instance.money += orderedItem.Value * itemDetails.cost;
+            }
+            
             // Update money UI
             mainUIHandler.UpdateFundingText();
 

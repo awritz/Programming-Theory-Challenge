@@ -12,6 +12,8 @@ public class MainUIHandler : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI orderTimer;
 
+    [SerializeField] private TextMeshProUGUI orderDisplay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,11 @@ public class MainUIHandler : MonoBehaviour
     public void UpdateTimerText(float value)
     {
         orderTimer.text = $"Time Remaining for Order: {value}s";
+    }
+
+    public void UpdateOrderDisplayText(string text)
+    {
+        orderDisplay.text = $"Current order:\n{text}";
     }
     
 }
