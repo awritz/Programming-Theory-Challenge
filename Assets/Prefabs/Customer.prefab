@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3870775949382374961}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -113,3 +113,16 @@ MonoBehaviour:
   potentialItems:
   - {fileID: 4871836484299957555, guid: d311e7dfd9de0a5489f88db60c3c0ddd, type: 3}
   - {fileID: 4029101100411230013, guid: bdb6441563780924baeb158d11c024e6, type: 3}
+  characterModels:
+  - {fileID: 100046, guid: f8abbdd178867d2419ba9feb6ff2cba0, type: 3}
+  - {fileID: 100000, guid: 6f52b946693e54048af74f5cd6ba49f8, type: 3}
+  - {fileID: 100000, guid: 3bd8a450fcb589542a7843ea7bda2ee6, type: 3}
+  - {fileID: 100000, guid: fc01a3bb589cebc4aa10892db165243b, type: 3}
+  - {fileID: 100046, guid: 814f4326a50812947b2469896d89a215, type: 3}
+  - {fileID: 100046, guid: 7b6675de545141649953fd8adec4561b, type: 3}
+  - {fileID: 100046, guid: 2af1fa464b69e4c4cb1a408373c7d971, type: 3}
+  - {fileID: 100000, guid: f3f69bcf5a1514c458ed5c9b96f28e34, type: 3}
+  - {fileID: 100046, guid: 3cf7f489270aac84fb12901330960a5b, type: 3}
+  - {fileID: 100046, guid: 0e1316a3e46fdb349b6ff648610a1d71, type: 3}
+  - {fileID: 100000, guid: 610afbb40c4385d42aa33adfe3531f0a, type: 3}
+  - {fileID: 100000, guid: 7169122e91e1981469b2b6045ddf7963, type: 3}

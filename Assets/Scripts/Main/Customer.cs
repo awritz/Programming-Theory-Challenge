@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Customer : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Customer : MonoBehaviour
     
     [SerializeField]
     private List<Item> potentialItems;
+
+    [SerializeField] private List<GameObject> characterModels;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +23,17 @@ public class Customer : MonoBehaviour
         order = new Order(itemCount, availableItems);
         orderIsAvailable = true;
 
-        gameObject.GetComponent<Renderer>().material.SetColor("_Color", new Color(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f)));
+        GameObject model = characterModels[Random.Range(0, characterModels.Count)];
+        
+        Vector3 position = new Vector3(0, -1, 0);
+        model.transform.position = position;
+        
+        Vector3 scale = new Vector3(.75f, .75f, .75f);
+        model.transform.localScale = scale;
+        
+        Instantiate(model, transform, false);
+        
+        // gameObject.GetComponent<Renderer>().material.SetColor("_Color", new Color(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f)));
     }
 
     private List<Item> getAvailableItems(List<Item> items)
