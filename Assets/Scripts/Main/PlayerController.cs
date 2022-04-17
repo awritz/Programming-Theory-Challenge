@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     public GameObject NearbyItem;
 
     private DeliveryZone _deliveryZone;
+
+    [SerializeField]
+    private AudioManager _audioManager;
     
     // Start is called before the first frame update
     void Start()
@@ -101,11 +104,13 @@ public class PlayerController : MonoBehaviour
         HeldItem = NearbyItem;
         HeldItem.GetComponent<Rigidbody>().detectCollisions = false;
         NearbyItem = null;
+        _audioManager.PlayItemPickupSound();
     }
     
     void DropItem()
     {
         HeldItem.GetComponent<Rigidbody>().detectCollisions = true;
         HeldItem = null;
+        _audioManager.PlayItemDropSound();
     }
 }

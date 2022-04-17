@@ -23,6 +23,9 @@ public class DeliveryZone : MonoBehaviour
     private bool orderIsComplete;
     private bool newOrderIsAvailable = true;
     
+    [SerializeField]
+    private AudioManager _audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +62,7 @@ public class DeliveryZone : MonoBehaviour
             // Order has run out of time.
             // Get new customer
             Debug.Log("Order Failed! You have run out of time!");   
+            _audioManager.PlayOrderFailedSound();
             GetNextCustomer();
         }
     }
@@ -110,6 +114,7 @@ public class DeliveryZone : MonoBehaviour
         if (equal)
         {
             Debug.Log("Order completed!"); 
+            _audioManager.PlayOrderCompleteSound();
             // Clear all items in zone
             foreach (var item in itemsInZone)
             {
@@ -134,6 +139,7 @@ public class DeliveryZone : MonoBehaviour
         else
         {
             Debug.Log("Order is incomplete.");
+            _audioManager.PlayOrderIncompleteSound();
         }
         
     }
