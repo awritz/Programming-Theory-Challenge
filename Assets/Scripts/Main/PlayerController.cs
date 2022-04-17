@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 
     private const float Speed = 5.0f;
     private Rigidbody _playerRigidbody;
+    private Animator _playerAnimator;
 
     [SerializeField]
     private GameObject _itemHolderLocation;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _playerRigidbody = GetComponent<Rigidbody>();
+        _playerAnimator = GetComponentInChildren<Animator>();
         _deliveryZone = GameObject.Find("DeliveryZone").GetComponent<DeliveryZone>();
     }
 
@@ -56,6 +58,15 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
 
+        if (Mathf.Abs(verticalInput) > 0 || Mathf.Abs(horizontalInput) > 0)
+        {
+            _playerAnimator.SetFloat("Speed_f", 0.3f);
+        }
+        else
+        {
+            _playerAnimator.SetFloat("Speed_f", 0f);
+        }
+        
         Vector3 inputDir = new Vector3(horizontalInput, 0, verticalInput);
         
         _playerRigidbody.velocity = inputDir * Speed;
