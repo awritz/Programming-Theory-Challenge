@@ -42,5 +42,6 @@ public abstract class Item : MonoBehaviour
         }
     }
 
+    // POLYMORPHISM
     public abstract string GetItemId();
 }

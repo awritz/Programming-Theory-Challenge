@@ -5,6 +5,7 @@ using UnityEngine;
 // INHERITANCE
 public class CandleBlue : Item
 {
+    // POLYMORPHISM
     public override string GetItemId()
     {
         return "candle-blue";
