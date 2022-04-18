@@ -6,7 +6,8 @@ public class Order
 {
     public Dictionary<string, int> items;
 
-    public float timeLimit;
+    // ENCAPSULATION
+    public float TimeLimit { get; private set; }
 
     public Order(int itemCount, List<Item> potentialItems)
     {
@@ -19,7 +20,12 @@ public class Order
         }
 
         // Give 30 seconds per item in the order.
-        timeLimit = 10 * itemCount;
+        TimeLimit = 10 * itemCount;
+    }
+
+    public void DecrementTimeLimit(float value)
+    {
+        TimeLimit -= value;
     }
 
 }

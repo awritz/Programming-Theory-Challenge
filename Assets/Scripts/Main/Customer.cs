@@ -6,8 +6,9 @@ using UnityEngine.UIElements;
 
 public class Customer : MonoBehaviour
 {
-    public Order order;
-    public bool orderIsAvailable;
+    // ENCAPSULATION
+    public Order order { get; private set; }
+    public bool orderIsAvailable{ get; private set; }
     
     [SerializeField]
     private List<Item> potentialItems;
@@ -67,8 +68,8 @@ public class Customer : MonoBehaviour
     {
         if (orderIsAvailable)
         {
-            order.timeLimit -= Time.deltaTime;
-            if (order.timeLimit <= 0)
+            order.DecrementTimeLimit(Time.deltaTime);
+            if (order.TimeLimit <= 0)
             {
                 orderIsAvailable = false;
             }

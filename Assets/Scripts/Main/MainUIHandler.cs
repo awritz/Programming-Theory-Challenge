@@ -31,21 +31,25 @@ public class MainUIHandler : MonoBehaviour
         
     }
     
+    // ABSTRACTION
     public void ReturnToMenu()
     {
         SceneManager.LoadScene(0);
     }
 
+    // ABSTRACTION
     public void UpdateFundingText()
     {
         fundingText.text = "Current Funding: $" + DataManager.Instance.money;
     }
 
+    // ABSTRACTION
     public void UpdateTimerText(float value)
     {
         orderTimer.text = $"Time Remaining for Order: {value}s";
     }
 
+    // ABSTRACTION
     public void UpdateOrderDisplayText(string text)
     {
         orderDisplay.text = $"Current order:\n{text}";

@@ -53,7 +53,7 @@ public class DeliveryZone : MonoBehaviour
         
         currentCustomer.DecrementOrderTimer();
 
-        float time = Mathf.Round(currentCustomer.order.timeLimit);
+        float time = Mathf.Round(currentCustomer.order.TimeLimit);
         
         mainUIHandler.UpdateTimerText(time);
         
